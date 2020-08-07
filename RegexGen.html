@@ -1,0 +1,334 @@
+<html> 
+<head> 
+	<style> 
+		.title{ 
+		margin: auto;
+        margin-top: 50px;
+		text-align:center; 
+		width: fit-content; 
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-family: cursive;
+        font-size: 20px;
+		color:green; 
+		border: solid black 2px;
+        border-radius: 10px; 
+		} 
+
+		input[type="button"] 
+		{ 
+		background-color: darkcyan; 
+		color: black; 
+		border: solid black 1px; 
+        font-size: 15px;
+        font-family: 'Lucida Sans';
+        padding: 10px;
+        border-radius: 10px;
+		width:100% 
+		} 
+
+        .label1 
+		{ 
+		background-color: aliceblue; 
+		color: black; 
+		border: solid black 1px; 
+        font-size: 15px;
+        font-family: 'Lucida Sans';
+        padding: 10px;
+        border-radius: 10px;
+		width:100% 
+		} 
+
+        table, th, td {
+        border-radius: 10px;
+        margin: auto;
+        margin-top: -30px;
+        }
+        
+        table {
+        border-collapse:separate;
+        border-spacing: 20px;
+        }
+        
+		input[type="text"] 
+		{ 
+		background-color:white; 
+		border: solid black 1px; 
+        border-radius: 10px;
+        font-size: 20px;
+        padding: 10px;
+        height: 50px;
+		width:50%;
+        margin: 50px; 
+        margin-left: 25%;
+		}
+
+        input[type="tbtext"] 
+		{ 
+		background-color:white; 
+		border: solid black 1px; 
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: 'Lucida Sans';
+        padding: 10px;
+        width: 100%;
+		}
+
+        textarea
+		{ 
+		background-color:white; 
+		border: solid black 1px; 
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: 'Lucida Sans';
+        padding: 10px;
+        width: 100%;
+		}
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script> 
+		function dis(val) 
+		{ 
+            var ans = ""
+            switch(val) 
+            {
+                case 'digit':
+                    ans = "\\d"
+                    break;
+                case 'lalpha':
+                    ans = '[a-z]'
+                    break;
+                case 'ualpha':
+                    ans = '[A-Z]'
+                    break;
+                case 'alpha':
+                    ans = '[a-zA-Z]'
+                    break;
+                case 'space':
+                    ans = '\\s'
+                    break;
+                case 'newl':
+                    ans = '\\n'
+                    break;
+                case 'aword':
+                    ans = '\\w'
+                    break;
+                case 'thing':
+                    ans = '\.'
+                    break;
+                case 'eor':
+                    ans = '|'
+                    break;
+                case 'tab':
+                    ans = '\\t'
+                    break;
+                case '0more':
+                    ans = '*'
+                    break;
+                case '1more':
+                    ans = '+'
+                    break;
+                case '0or1':
+                    ans = '?'
+                    break;
+                case 'startlb':
+                    ans = '(?<='
+                    break;
+                case 'endl':
+                    ans = ')'
+                    break;
+                case 'startla':
+                    ans = '(?='
+                    break;
+                case 'startg':
+                    ans = '('
+                    break;
+                case 'spec':
+                    ans = document.getElementById("specch").value
+                    ans = ans.replace('.','\\.')
+                    ans = ans.replace('+','\\+')
+                    ans = ans.replace('*','\\*')
+                    ans = ans.replace('?','\\?')
+                    ans = ans.replace('(','\\(')
+                    ans = ans.replace(')','\\)')
+                    ans = ans.replace(']','\\]')
+                    ans = ans.replace('[','\\[')
+                    ans = ans.replace('{','\\{')
+                    ans = ans.replace('}','\\}')
+                    document.getElementById("specch").value = ""
+                    break;
+                default:
+                    
+            }
+			document.getElementById("result").value+=ans
+
+		} 
+		
+        function qty(q) 
+		{ 
+            var res = ""
+            switch(q)
+            {
+                case 'adqty':
+                    res = document.getElementById("anydigit").value
+                    document.getElementById("anydigit").value = ""
+                    break;
+                case 'alaqty':
+                    res = document.getElementById("anyla").value
+                    document.getElementById("anyla").value = ""
+                    break;
+                case 'auaqty':
+                    res = document.getElementById("anyua").value
+                    document.getElementById("anyua").value = ""
+                    break;
+                case 'aaqty':
+                    res = document.getElementById("anya").value
+                    document.getElementById("anya").value = ""
+                    break;
+                case 'awqty':
+                    res = document.getElementById("anyw").value
+                    document.getElementById("anyw").value = ""
+                    break;
+                case 'atqty':
+                    res = document.getElementById("anyt").value
+                    document.getElementById("anyt").value = ""
+                    break;
+                default:
+
+            }
+            res = '{' +res+ '}'
+			document.getElementById("result").value+= res 
+		}
+
+		function solve() 
+		{ 
+			let x = document.getElementById("result").value 
+			let y = eval(x) 
+			document.getElementById("result").value = y 
+		} 
+		
+		function clr() 
+		{ 
+			document.getElementById("result").value = ""
+		} 
+        function modclr()
+        {
+            document.getElementById("modtxt").value = ""
+            document.getElementById("modres").value = ""
+        }
+        function mod()
+        {
+            document.getElementById("modreg").value = document.getElementById("result").value
+        }
+        function matcher()
+        {
+            var str1 = document.getElementById("modtxt").value
+            var str2 = document.getElementById("modreg").value
+            let pattern = new RegExp(str2, 'g');
+            res = str1.match(pattern)
+            document.getElementById("modres").value = res
+        }
+	</script>  
+</head> 
+
+<body> 
+	<div class = title >Regular Expression Generator</div> 
+	
+            <input type="text" id="result"/>
+    
+        <table class="table"> 
+            <tr>
+                <td colspan="3"></td>
+                <td colspan="4"><input type="button" style="font-weight: bold;background-color:cornflowerblue;" value="Test it out!" data-toggle="modal" data-target="#myModal" onclick="mod()"/></td>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="White Space" onclick="dis('space')"/> </td> 
+                <td colspan="3"><input type="button" value="New Line" onclick="dis('newl')"/> </td>
+                <td></td>
+                <td colspan="2"><input type="button" value="Either Or" onclick="dis('eor')"/> </td>   
+                <td colspan="1"><input type="button" value="Start Group" onclick="dis('startg')"/></td>
+                <td colspan="1"><input type="button" value="End Group" onclick="dis('endl')"/></td>
+                <td colspan="1"><input type="button" value="Tab" onclick="dis('tab')"/></td>
+            </tr>
+            <tr> 
+                <td><input type="button" value="Specific Character(s)"/> </td> 
+                <td><label class="label1">Value:</label></td> 
+                <td colspan="2"><input type="tbtext" id="specch"/> </td>
+                <td><input type="button" value="Add" onclick="dis('spec')"/> </td>  
+                <td></td>
+                <td><input type="button" value="Any digit" onclick="dis('digit')"/> </td> 
+                <td><label class="label1" >Range:</label></td> 
+                <td colspan="2"><input type="tbtext" id="anydigit" /> </td> 
+                <td><input type="button" value="Add" onclick="qty('adqty')"/> </td> 
+            </tr> 
+            <tr> 
+                <td><input type="button" value="Any lowercase alphabet" onclick="dis('lalpha')"/> </td> 
+                <td><label class="label1">Range:</label></td> 
+                <td colspan="2"><input type="tbtext" id="anyla"/> </td>
+                <td><input type="button" value="Add" onclick="qty('alaqty')"/> </td>  
+                <td></td>
+                <td><input type="button" value="Any uppercase alphabet" onclick="dis('ualpha')"/> </td> 
+                <td><label class="label1">Range:</label></td> 
+                <td colspan="2"><input type="tbtext" id="anyua"/> </td>
+                <td><input type="button" value="Add" onclick="qty('auaqty')"/> </td>  
+            </tr> 
+            <tr> 
+                <td><input type="button" value="Any alphabet" onclick="dis('alpha')"/> </td> 
+                <td><label class="label1">Range:</label></td> 
+                <td colspan="2"><input type="tbtext" id="anya"/> </td>
+                <td><input type="button" value="Add" onclick="qty('aaqty')"/> </td>  
+                <td></td>
+                <td><input type="button" value="Any word" onclick="dis('aword')"/> </td> 
+                <td><label class="label1">Range:</label></td> 
+                <td colspan="2"><input type="tbtext" id="anyw"/> </td>
+                <td><input type="button" value="Add" onclick="qty('awqty')"/> </td>  
+            </tr>
+            <tr> 
+                <td><input type="button" value="Anything" onclick="dis('thing')"/> </td> 
+                <td><label class="label1">Range:</label></td> 
+                <td colspan="2"><input type="tbtext" id="anyt"/> </td>
+                <td><input type="button" value="Add" onclick="qty('atqty')"/> </td> 
+                <td></td> 
+                <td><input type="button" style="font-weight: bold;" value="CLEAR ALL" onclick="clr()"/> </td>
+                <td><label class="label1">Occurrence:</label></td> 
+                <td><input type="button" value="0 or more" onclick="dis('0more')"/> </td>
+                <td><input type="button" value="1 or more" onclick="dis('1more')"/> </td>
+                <td><input type="button" value="0 or 1" onclick="dis('0or1')"/> </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="Start Look-behind" onclick="dis('startlb')"/> </td> 
+                <td colspan="3"><input type="button" value="End Look-behind" onclick="dis('endl')"/> </td>
+                <td></td>
+                <td colspan="2"><input type="button" value="Start Look-ahead" onclick="dis('startla')"/></td>   
+                <td colspan="3"><input type="button" value="End Look-ahead" onclick="dis('endl')"/> </td>
+            </tr>
+        </table>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              
+              <div class="modal-content">
+                <div class="modal-header" style="background-color:lightblue;">
+                  <button type="button" class="close" data-dismiss="modal" onclick="modclr()">&times;</button>
+                  <h4 class="modal-title">Test your RegEx!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Regex:</p><input type="tbtext" id="modreg"/>
+                    <p style="margin-top: 10px;">Enter String:</p><textarea id="modtxt"></textarea>
+                    <button type="button" class="btn btn-default" style="background-color: lightblue;margin-top: 10px;" onclick="matcher()">Find</button>
+                    <p style="margin-top: 10px;">Match Found:</p><textarea id="modres"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: lightblue;" onclick="modclr()">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div> 
+</body> 
+</html> 
